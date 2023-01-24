@@ -92,12 +92,44 @@ p {
   color: #9103fa;
 }
 .card-top {
-  padding: 8px 16px;
+  padding: 5px 16px;
   font-size: 14px;
   justify-content: space-between;
 }
 .card-bottom {
-  padding: 8px 16px;
+  padding: 0 16px 4px;
   font-size: 12px;
-  text-align: right;
+  text-align: left;
+}
+
+.pagination {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.pagination-box {
+  background-color: #fff;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+}
+
+.pagination-number {
+  background-color: #fff;
+  border: none;
+  margin: auto;
+  font-family: 'Poppins', sans-serif;
+  width: 25px;
+  height: 25px;
+}
+
+.pagination-number:hover {
+  background-color: rgb(221, 221, 221);
+}
+
+.pagination-current {
+  background-color: #9103fa;
+  color: white;
 }

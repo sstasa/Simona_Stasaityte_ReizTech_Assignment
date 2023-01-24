@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Pagination from './Pagination';
 import SingleCountryCard from './SingleCountryCard';
 function CountryList(props) {
   const url = 'https://restcountries.com/v2/all?fields=name,region,area';
@@ -9,6 +10,8 @@ function CountryList(props) {
     size: false,
     region: false,
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 12;
 
   useEffect(() => {
     fetch(url)
@@ -78,6 +81,11 @@ function CountryList(props) {
     }
     setFilters({ ...filters, region: false, size: false });
   }
+
+  const indexOfLast = currentPage * postsPerPage;
+  const indexOfFirst = indexOfLast - postsPerPage;
+  const currentCountries = countriesArr.slice(indexOfFirst, indexOfLast);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <section>
       <button onClick={handleSortFilter} className='btn sort-btn'>
@@ -110,7 +118,7 @@ function CountryList(props) {
         </div>
         {countriesArr.length ? (
           <ul className='countries-list'>
-            {countriesArr.map((countryObj) => (
+            {currentCountries.map((countryObj) => (
               <li key={countryObj.name} className='country-card'>
                 <SingleCountryCard
                   name={countryObj.name}
@@ -124,6 +132,11 @@ function CountryList(props) {
           <h2>Loading countries...</h2>
         )}
       </div>
+      <Pagination
+        total={countriesArr.length}
+        perPage={postsPerPage}
+        paginate={paginate}
+      />
     </section>
   );
 }
