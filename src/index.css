@@ -1,1 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
 
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: rgb(241, 241, 241);
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+.flex {
+  display: flex;
+}
+.btn {
+  font-family: 'Poppins', sans-serif;
+  background-color: #9103fa;
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 15px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  transition: all 0.2s;
+}
+.btn:hover {
+  background-color: #7e00df;
+}
+.fa {
+  font-size: 18px;
+}
+
+.fa-square-o {
+  padding-right: 2.5px;
+}
+.sort-btn {
+  float: right;
+  margin-left: 24px;
+}
+.countries-section {
+  align-items: flex-start;
+  gap: 24px;
+  margin-top: 20px;
+  position: relative;
+}
+.filter-panel {
+  border: 1px solid rgb(226, 226, 226);
+  background-color: #fff;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 8px;
+}
+
+.reset-btn {
+  background-color: transparent;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  text-align: left;
+  text-decoration: underline;
+  cursor: pointer;
+  color: rgb(56, 56, 56);
+  transition: all 0.2s;
+}
+.reset-btn:hover {
+  color: rgb(143, 143, 143);
+}
+.countries-list {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+}
+.country-card {
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 8px;
+}
+.country-name {
+  color: #9103fa;
+}
+.card-top {
+  padding: 5px 16px;
+  font-size: 14px;
+  justify-content: space-between;
+}
+.card-bottom {
+  padding: 0 16px 4px;
+  font-size: 12px;
+  text-align: left;
+}
+
+.pagination {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.pagination-box {
+  background-color: #fff;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+}
+
+.pagination-number {
+  background-color: #fff;
+  border: none;
+  margin: auto;
+  font-family: 'Poppins', sans-serif;
+  width: 25px;
+  height: 25px;
+}
+
+.pagination-number:hover {
+  background-color: rgb(209, 185, 255);
+}
+
+.pagination-current {
+  background-color: #9103fa;
+  color: white;
+}
