@@ -70,7 +70,14 @@ function CountryList(props) {
     }
     setFilters({ ...filters, region: !filters.region });
   }
-
+  function handleReset() {
+    if (filters.sorted) {
+      setCountriesArr([...originalCountriesArr].reverse());
+    } else {
+      setCountriesArr(originalCountriesArr);
+    }
+    setFilters({ ...filters, region: false, size: false });
+  }
   return (
     <section>
       <button onClick={handleSortFilter} className='btn sort-btn'>
@@ -80,7 +87,7 @@ function CountryList(props) {
         <div className='flex filter-panel'>
           <h2>Filters</h2>
           <button onClick={handleSizeFilter} className='btn'>
-            Countries smaller than Lithuania{' '}
+            Countries smaller than Lithuania
             <i
               className={`fa ${
                 filters.size ? 'fa-check-square-o' : 'fa-square-o'
@@ -89,13 +96,16 @@ function CountryList(props) {
             ></i>
           </button>
           <button onClick={handleOceaniaFilter} className='btn'>
-            Countries inside Oceania{' '}
+            Countries inside Oceania
             <i
               className={`fa ${
                 filters.region ? 'fa-check-square-o' : 'fa-square-o'
               }`}
               aria-hidden='true'
             ></i>
+          </button>
+          <button className='reset-btn' onClick={handleReset}>
+            Reset filters
           </button>
         </div>
         {countriesArr.length ? (

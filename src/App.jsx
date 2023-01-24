@@ -4,7 +4,7 @@ import CountryList from './components/CountryList';
 function App() {
   return (
     <div className='App'>
-      <h1>All countries in the world</h1>
+      <h1>Countries</h1>
       <CountryList />
     </div>
   );

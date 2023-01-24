@@ -37,6 +37,10 @@ p {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  transition: all 0.2s;
+}
+.btn:hover {
+  background-color: #7e00df;
 }
 .fa {
   font-size: 18px;
@@ -60,6 +64,20 @@ p {
   flex-direction: column;
   gap: 6px;
   padding: 8px 8px;
+}
+
+.reset-btn {
+  background-color: none;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  text-align: left;
+  text-decoration: underline;
+  cursor: pointer;
+  color: rgb(56, 56, 56);
+  transition: all 0.2s;
+}
+.reset-btn:hover {
+  color: rgb(143, 143, 143);
 }
 .countries-list {
   display: flex;
