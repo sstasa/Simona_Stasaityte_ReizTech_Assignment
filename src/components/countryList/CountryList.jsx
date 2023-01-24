@@ -1,42 +1,88 @@
 import { useEffect, useState } from 'react';
 function CountryList(props) {
   const url = 'https://restcountries.com/v2/all?fields=name,region,area';
+  const [originalCountriesArr, setOriginalCountriesArr] = useState([]);
   const [countriesArr, setCountriesArr] = useState([]);
-  const [sorted, setSorted] = useState(false);
+  const [filters, setFilters] = useState({
+    sorted: false,
+    size: false,
+    region: false,
+  });
 
   useEffect(() => {
     fetch(url)
       .then((resp) => resp.json())
-      .then((data) => setCountriesArr(data));
+      .then((data) => {
+        setCountriesArr(data);
+        setOriginalCountriesArr(data);
+      });
   }, [url]);
 
-  function sorting() {
-    let reversedCountriesArr = [...countriesArr].reverse();
-    setCountriesArr(reversedCountriesArr);
-    setSorted(!sorted);
+  function filterSize(array) {
+    let filteredArray = array.filter((country) => country.area < 65300);
+    return filteredArray;
+  }
+  function filterRegion(array) {
+    let filteredArray = array.filter((country) => country.region === 'Oceania');
+    return filteredArray;
   }
 
-  function filterSmaller() {
-    let smallerThanLTArr = [...countriesArr].filter(
-      (country) => country.area < 65300
-    );
-
-    setCountriesArr(smallerThanLTArr);
+  function handleSortFilter() {
+    setCountriesArr([...countriesArr].reverse());
+    setFilters({ ...filters, sorted: !filters.sorted });
   }
 
-  function filterOceania() {
-    let oceaniaArr = [...countriesArr].filter(
-      (country) => country.region === 'Oceania'
-    );
+  function handleSizeFilter() {
+    if (filters.size) {
+      if (filters.region && filters.sorted) {
+        setCountriesArr(filterRegion(originalCountriesArr).reverse());
+      } else if (filters.region) {
+        setCountriesArr(filterRegion(originalCountriesArr));
+      } else if (filters.sorted) {
+        setCountriesArr(originalCountriesArr.reverse());
+      } else {
+        setCountriesArr(originalCountriesArr);
+      }
+    } else {
+      setCountriesArr(filterSize(countriesArr));
+    }
+    setFilters({ ...filters, size: !filters.size });
+  }
 
-    setCountriesArr(oceaniaArr);
+  function handleOceaniaFilter() {
+    if (filters.region) {
+      if (filters.size && filters.sorted) {
+        setCountriesArr(filterSize(originalCountriesArr).reverse());
+      } else if (filters.size) {
+        setCountriesArr(filterSize(originalCountriesArr));
+      } else if (filters.sorted) {
+        setCountriesArr(originalCountriesArr.reverse());
+      } else {
+        setCountriesArr(originalCountriesArr);
+      }
+    } else {
+      setCountriesArr(filterRegion(countriesArr));
+    }
+    setFilters({ ...filters, region: !filters.region });
   }
 
   return (
     <div>
-      <button onClick={sorting}>{sorted ? 'Sort A-Z' : 'Sort Z-A'}</button>
-      <button onClick={filterSmaller}>Countries smaller than Lithuania</button>
-      <button onClick={filterOceania}>Countries inside Oceania</button>
+      <button onClick={handleSortFilter}>
+        {filters.sorted ? 'Sort A-Z' : 'Sort Z-A'}
+      </button>
+      <button
+        onClick={handleSizeFilter}
+        className={filters.size ? 'btn-selected' : ''}
+      >
+        Countries smaller than Lithuania
+      </button>
+      <button
+        onClick={handleOceaniaFilter}
+        className={filters.region ? 'btn-selected' : ''}
+      >
+        Countries inside Oceania
+      </button>
       {countriesArr.length && (
         <ul>
           {countriesArr.map((countryObj) => (
