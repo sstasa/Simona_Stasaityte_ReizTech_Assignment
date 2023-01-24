@@ -12,7 +12,6 @@ function CountryList(props) {
   });
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 12;
-
   useEffect(() => {
     fetch(url)
       .then((resp) => resp.json())
@@ -38,6 +37,7 @@ function CountryList(props) {
   function handleSortFilter() {
     setCountriesArr([...countriesArr].reverse());
     setFilters({ ...filters, sorted: !filters.sorted });
+    setCurrentPage(1);
   }
 
   function handleSizeFilter() {
@@ -55,6 +55,7 @@ function CountryList(props) {
       setCountriesArr(filterSize(countriesArr));
     }
     setFilters({ ...filters, size: !filters.size });
+    setCurrentPage(1);
   }
 
   function handleOceaniaFilter() {
@@ -72,6 +73,7 @@ function CountryList(props) {
       setCountriesArr(filterRegion(countriesArr));
     }
     setFilters({ ...filters, region: !filters.region });
+    setCurrentPage(1);
   }
   function handleReset() {
     if (filters.sorted) {
@@ -80,6 +82,7 @@ function CountryList(props) {
       setCountriesArr(originalCountriesArr);
     }
     setFilters({ ...filters, region: false, size: false });
+    setCurrentPage(1);
   }
 
   const indexOfLast = currentPage * postsPerPage;
@@ -136,6 +139,7 @@ function CountryList(props) {
         total={countriesArr.length}
         perPage={postsPerPage}
         paginate={paginate}
+        currentPage={currentPage}
       />
     </section>
   );
