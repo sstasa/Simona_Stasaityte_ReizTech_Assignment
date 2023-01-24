@@ -73,44 +73,47 @@ function CountryList(props) {
 
   return (
     <section>
-      <div className='flex'>
-        <button onClick={handleSortFilter} className='btn'>
-          {filters.sorted ? 'Sort A-Z' : 'Sort Z-A'}
-        </button>
-        <button onClick={handleSizeFilter} className='btn'>
-          Countries smaller than Lithuania{' '}
-          <i
-            className={`fa ${
-              filters.size ? 'fa-check-square-o' : 'fa-square-o'
-            }`}
-            aria-hidden='true'
-          ></i>
-        </button>
-        <button onClick={handleOceaniaFilter} className='btn'>
-          Countries inside Oceania{' '}
-          <i
-            className={`fa ${
-              filters.region ? 'fa-check-square-o' : 'fa-square-o'
-            }`}
-            aria-hidden='true'
-          ></i>
-        </button>
+      <button onClick={handleSortFilter} className='btn sort-btn'>
+        {filters.sorted ? 'Sort A-Z' : 'Sort Z-A'}
+      </button>
+      <div className='flex countries-section'>
+        <div className='flex filter-panel'>
+          <h2>Filters</h2>
+          <button onClick={handleSizeFilter} className='btn'>
+            Countries smaller than Lithuania{' '}
+            <i
+              className={`fa ${
+                filters.size ? 'fa-check-square-o' : 'fa-square-o'
+              }`}
+              aria-hidden='true'
+            ></i>
+          </button>
+          <button onClick={handleOceaniaFilter} className='btn'>
+            Countries inside Oceania{' '}
+            <i
+              className={`fa ${
+                filters.region ? 'fa-check-square-o' : 'fa-square-o'
+              }`}
+              aria-hidden='true'
+            ></i>
+          </button>
+        </div>
+        {countriesArr.length ? (
+          <ul className='countries-list'>
+            {countriesArr.map((countryObj) => (
+              <li key={countryObj.name} className='country-card'>
+                <SingleCountryCard
+                  name={countryObj.name}
+                  region={countryObj.region}
+                  area={countryObj.area}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <h2>Loading countries...</h2>
+        )}
       </div>
-      {countriesArr.length ? (
-        <ul>
-          {countriesArr.map((countryObj) => (
-            <li key={countryObj.name} className='country-card'>
-              <SingleCountryCard
-                name={countryObj.name}
-                region={countryObj.region}
-                area={countryObj.area}
-              />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <h2>Loading countries...</h2>
-      )}
     </section>
   );
 }
