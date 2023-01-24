@@ -10,17 +10,33 @@ function CountryList(props) {
       .then((data) => setCountriesArr(data));
   }, [url]);
 
-  function setSorting() {
+  function sorting() {
     let reversedCountriesArr = [...countriesArr].reverse();
     setCountriesArr(reversedCountriesArr);
     setSorted(!sorted);
   }
 
-  //65300 LITHUANIA AREA
+  function filterSmaller() {
+    let smallerThanLTArr = [...countriesArr].filter(
+      (country) => country.area < 65300
+    );
+
+    setCountriesArr(smallerThanLTArr);
+  }
+
+  function filterOceania() {
+    let oceaniaArr = [...countriesArr].filter(
+      (country) => country.region === 'Oceania'
+    );
+
+    setCountriesArr(oceaniaArr);
+  }
 
   return (
     <div>
-      <button onClick={setSorting}>Sort Z-A</button>
+      <button onClick={sorting}>{sorted ? 'Sort A-Z' : 'Sort Z-A'}</button>
+      <button onClick={filterSmaller}>Countries smaller than Lithuania</button>
+      <button onClick={filterOceania}>Countries inside Oceania</button>
       {countriesArr.length && (
         <ul>
           {countriesArr.map((countryObj) => (
