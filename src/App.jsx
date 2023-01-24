@@ -1,10 +1,10 @@
 import './App.css';
-import CountryList from './components/countryList/CountryList';
+import CountryList from './components/CountryList';
 
 function App() {
   return (
     <div className='App'>
-      <h1>Hello world</h1>
+      <h1>Countries</h1>
       <CountryList />
     </div>
   );

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import SingleCountryCard from './SingleCountryCard';
 function CountryList(props) {
   const url = 'https://restcountries.com/v2/all?fields=name,region,area';
   const [originalCountriesArr, setOriginalCountriesArr] = useState([]);
@@ -13,8 +14,12 @@ function CountryList(props) {
     fetch(url)
       .then((resp) => resp.json())
       .then((data) => {
-        setCountriesArr(data);
-        setOriginalCountriesArr(data);
+        setCountriesArr(
+          data.sort((a, b) => a.name.localeCompare(b.name, undefined))
+        );
+        setOriginalCountriesArr(
+          data.sort((a, b) => a.name.localeCompare(b.name, undefined))
+        );
       });
   }, [url]);
 
@@ -67,33 +72,46 @@ function CountryList(props) {
   }
 
   return (
-    <div>
-      <button onClick={handleSortFilter}>
-        {filters.sorted ? 'Sort A-Z' : 'Sort Z-A'}
-      </button>
-      <button
-        onClick={handleSizeFilter}
-        className={filters.size ? 'btn-selected' : ''}
-      >
-        Countries smaller than Lithuania
-      </button>
-      <button
-        onClick={handleOceaniaFilter}
-        className={filters.region ? 'btn-selected' : ''}
-      >
-        Countries inside Oceania
-      </button>
-      {countriesArr.length && (
+    <section>
+      <div className='flex'>
+        <button onClick={handleSortFilter} className='btn'>
+          {filters.sorted ? 'Sort A-Z' : 'Sort Z-A'}
+        </button>
+        <button onClick={handleSizeFilter} className='btn'>
+          Countries smaller than Lithuania{' '}
+          <i
+            className={`fa ${
+              filters.size ? 'fa-check-square-o' : 'fa-square-o'
+            }`}
+            aria-hidden='true'
+          ></i>
+        </button>
+        <button onClick={handleOceaniaFilter} className='btn'>
+          Countries inside Oceania{' '}
+          <i
+            className={`fa ${
+              filters.region ? 'fa-check-square-o' : 'fa-square-o'
+            }`}
+            aria-hidden='true'
+          ></i>
+        </button>
+      </div>
+      {countriesArr.length ? (
         <ul>
           {countriesArr.map((countryObj) => (
-            <li key={countryObj.name}>
-              {countryObj.name} Region:{countryObj.region} Area:
-              {countryObj.area}
+            <li key={countryObj.name} className='country-card'>
+              <SingleCountryCard
+                name={countryObj.name}
+                region={countryObj.region}
+                area={countryObj.area}
+              />
             </li>
           ))}
         </ul>
+      ) : (
+        <h2>Loading countries...</h2>
       )}
-    </div>
+    </section>
   );
 }
 export default CountryList;

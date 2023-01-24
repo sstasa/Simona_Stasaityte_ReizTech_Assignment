@@ -1,3 +1,57 @@
-.btn-selected {
-  background-color: rgb(226, 154, 154);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+.flex {
+  display: flex;
+}
+.btn {
+  font-family: 'Poppins', sans-serif;
+  background-color: #9103fa;
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 15px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 8px;
+}
+.fa {
+  font-size: 18px;
+}
+.fa-square-o {
+  padding-right: 2.5px;
+}
+
+.country-card {
+  background-color: #8f03fa2a;
+  margin-bottom: 16px;
+  border: 1px solid #9103fa;
+  border-radius: 5px;
+}
+.card-top {
+  padding: 8px 16px;
+  color: white;
+  background-color: #9103fa;
+  justify-content: space-between;
+}
+.card-bottom {
+  padding: 8px 16px;
 }
